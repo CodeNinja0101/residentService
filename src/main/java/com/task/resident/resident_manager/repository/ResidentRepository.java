@@ -6,5 +6,4 @@ import com.task.resident.resident_manager.entity.ResidentEntity;
 
 public interface ResidentRepository extends JpaRepository<ResidentEntity, Integer> {
 
-//	ResidentEntity save(ResidentEntity existingResident);
 }
