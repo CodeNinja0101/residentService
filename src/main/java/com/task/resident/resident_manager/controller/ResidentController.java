@@ -12,43 +12,50 @@ import com.task.resident.resident_manager.entity.ResidentEntity;
 import com.task.resident.resident_manager.sharedException.DataNotFoundException;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/resident")
 public class ResidentController {
 
-	@Autowired
-	private ResidentService residentService;
-	
-	 private static final Logger logger = LoggerFactory.getLogger(ResidentServiceImpl.class);
+    @Autowired
+    private ResidentService residentService;
 
-	@PostMapping
-	public ResidentEntity createResident(@RequestBody ResidentEntity residentEntity) {
-		logger.info("Creating new resident: {}", residentEntity.toString());
-		return residentService.createResident(residentEntity);
-	}
+    private static final Logger logger = LoggerFactory.getLogger(ResidentServiceImpl.class);
 
-	@GetMapping
-	public List<ResidentEntity> getAllResidents() {
-		 logger.info("Getting all residents");
-		return residentService.getAllResidents();
-	}
+    @PostMapping
+    public ResidentEntity createResident(@RequestBody ResidentEntity residentEntity) {
+        logger.info("Creating new resident: {}", residentEntity.toString());
+        return residentService.createResident(residentEntity);
+    }
 
-	@GetMapping("/{id}")
-	public ResidentEntity getResidentById(@PathVariable Integer id) {
-		logger.info("Getting resident with Id: {}", id);
-		return residentService.getResidentById(id);
-	}
+    @GetMapping
+    public List<ResidentEntity> getAllResidents() {
+        logger.info("Getting all residents");
+        return residentService.getAllResidents();
+    }
 
-	@PutMapping("/{id}")
-	public ResidentEntity updateResident(@PathVariable Integer id, @RequestBody ResidentEntity residentEntity) {
-		logger.info("Updating resident with Id: {} , {}", id, residentEntity.toString());
-		return residentService.updateResident(id, residentEntity);
-	}
+    @GetMapping("/{id}")
+    public ResidentEntity getResidentById(@PathVariable Integer id) {
+        logger.info("Getting resident with Id: {}", id);
+        return residentService.getResidentById(id);
+    }
 
-	@DeleteMapping("/{id}")
-	public void deleteResident(@PathVariable Integer id) {
-		logger.info("Deleting resident with Id: {}", id);
-		residentService.deleteResident(id);
-	}
+    @PutMapping("/{id}")
+    public ResidentEntity updateResident(@PathVariable Integer id, @RequestBody ResidentEntity residentEntity) {
+        logger.info("Updating resident with Id: {} , {}", id, residentEntity.toString());
+        return residentService.updateResident(id, residentEntity);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteResident(@PathVariable Integer id) {
+        logger.info("Deleting resident with Id: {}", id);
+        residentService.deleteResident(id);
+    }
+
+    @PatchMapping("/{id}")
+    public ResidentEntity patchResident(@PathVariable Integer id, @RequestBody Map<String, Object> updates) {
+        logger.info("Patching resident with Id: {}, {}", id, updates.toString());
+        return residentService.patchResident(id, updates);
+    }
 }
